@@ -1,0 +1,7 @@
+#usamos el gestor de dependencias, para instalar bower (nuestro gestor de librerias del proyecto) (requiere nodeJS)
+# el -g es importante, para que lo instale de forma global
+npm install -g bower
+
+#
+bower install angular
+bower install bootstrap
