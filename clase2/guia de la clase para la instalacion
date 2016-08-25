@@ -1,0 +1,47 @@
+1- Instalar Gulp (Por unica vez). (es un automatizador de tareas)
+	npm install --global gulp-cli
+
+2- Crear package.json.
+	npm init
+
+3- Instalar Gulp en el proyecto.
+	npm install --save-dev gulp
+
+4- Crear el archivo gulpfile.js.
+
+5- Incluir el modulo gulp.
+	var gulp = require('gulp');
+
+6- Crear una tarea.
+	gulp.task('nombreTarea', function() {
+	  // codigo de la tarea
+
+	});
+
+7- Modulo gulp-uglify (Minificador de codigo).
+	a- npm install --save-dev gulp-uglify
+
+	b- var uglify = require('gulp-uglify');
+
+	c- gulp.task('minjs', function() {
+    		gulp.src('app/js/*.js') // carpeta de origen
+        	.pipe(uglify())
+	        .pipe(gulp.dest('app/dist')); // carpeta de destino
+	   });
+
+8- Modulo gulp-server-livereload (Recarga pagina).
+
+	a- npm install --save-dev gulp-server-livereload
+
+	b- var server = require('gulp-server-livereload');
+
+	c- gulp.task('serve', function() {
+  		gulp.src('app')
+		  .pipe(server({
+			  port: 8100,
+			  defaultFile: 'index.html',
+			  livereload: true,
+			  open: true
+		    }));
+	  });
+
