@@ -1,0 +1,43 @@
+no olvidar correr
+npm install -g gulp-cli
+npm install bower
+gulp bower
+
+gurlp serve
+si no funca, sale un npm install
+
+
+ANGULAR
+
+despues de declarar los scripts q llaman a angular y la modulo nuestro.
+
+// con 1 parametro hacemos un getter y con 2 parametros es un setter
+angular
+	.module('miApp',[])
+	.controller("miCtrl",function($scope){
+		$scope.email = "mi@email.com";
+		$scope.vista = 1;
+	})
+
+debemos enun tag contenedor, colocar ng-app con el nombre de la app creada
+<body ng-app="miApp">
+
+para trabajar con variables, usamos doble llave {{nombreVariable}}
+ <h2>{{email}}</h2>
+
+
+ algunas direcctivas
+ ng-if="true/false" // si se evalua como true.. se ejecuta el codigo de adentro.. si se evalua como false.. no ejecuta el contenedor.
+
+
+
+  <input type="email" ng-model="email" class="form-control" placeholder="Email">
+
+
+  <div class="col col-md-9" ng-include="'views/form.html'">
+</div>
+<div class="col col-md-9" ng-if="vista==1" ng-include="'views/list.html'">
+</div>
+
+              <a href="#" ng-click="vista=2" class="list-group-item">Dapibus ac facilisis in</a>
+              <a href="#" ng-click="vista=1" class="list-group-item">Morbi leo risus</a>
