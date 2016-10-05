@@ -1,0 +1,52 @@
+
+<div class="container">
+<div class="row">
+
+<div class="col-sm-6" ng-controller="CargaCtrl">
+    <!-- FORM ============ -->
+
+    <form name="userForm" ng-submit="cargar()"  novalidate>
+
+        <!-- NAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+            <label>Nombre</label>
+            <input type="text" name="name" class="form-control" ng-model="user.name" required>
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">El nombre es requerido</p>
+        </div>
+
+        <!-- Apellido -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.apellido.$invalid && !userForm.apellido.$pristine }">
+            <label>Apellido</label>
+            <input type="text" name="apellido" class="form-control" ng-model="user.apellido" required>
+            <p ng-show="userForm.apellido.$invalid && !userForm.apellido.$pristine" class="help-block">El apellido es requerido</p>
+        </div>
+
+        <!-- Mail -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.mail.$invalid && !userForm.mail.$pristine }">
+            <label>Mail</label>
+            <input type="email" name="mail" class="form-control" ng-model="user.mail" required>
+            <p ng-show="userForm.mail.$invalid && !userForm.mail.$pristine" class="help-block">El mail es requerido</p>
+        </div>
+
+        <!-- Sexo -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.sexo.$invalid && !userForm.sexo.$pristine }">
+            <label>Sexo</label>
+            <input type="text" name="sexo" class="form-control" ng-model="user.sexo" required>
+            <p ng-show="userForm.sexo.$invalid && !userForm.sexo.$pristine" class="help-block">El sexo es requerido</p>
+        </div>
+
+         <!-- DNI -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.dni.$invalid && !userForm.dni.$pristine }">
+            <label>DNI</label>
+            <input type="number" name="dni" class="form-control" ng-model="user.dni" required>
+            <p ng-show="userForm.dni.$invalid && !userForm.dni.$pristine" class="help-block">El dni es requerido</p>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+
+    </form>
+  </div>
+
+</div>
+</div>
