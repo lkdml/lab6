@@ -1,0 +1,32 @@
+<div>
+	<table class="table striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Nombre de Usuario</th>
+				<th>Mail</th>
+				<th>Sexo</th>
+				<th>Edad</th>
+				<th>Longitud</th>
+				<th>Latitud</th>
+				<th>Amigos</th>
+				<th>Tags</th>
+				<th>Borrar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="slide" ng-repeat="usuario in usuarios | filtroArray:18 | filterTags:'anim' track by $index">
+				<td>{{$index+1}}</td>
+				<td>{{usuario.name | uppercase }}</td>
+				<td>{{usuario.email | miFiltro }}</td>
+				<td>{{usuario.gender | traduccionGenero }}</td>
+				<td>{{usuario.age}}</td>
+				<td>{{usuario.longitude | currency }}</td>
+				<td>{{usuario.latitude | number:2}}</td>
+				<td>{{usuario.friends | filtroAmigos}}</td>
+				<td>{{usuario.tags | fTags}}</td>
+				<td><button class="btn btn-small btn-danger" ng-click="borrar($index)"><span class="glyphicon glyphicon-trash"></span></button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

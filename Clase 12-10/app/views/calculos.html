@@ -1,0 +1,19 @@
+<div>
+	<div class="row">
+		<button class="btn btn-info" ng-click="devolverEmailUsuarios()">Email de los Usuarios</button>
+		<label>{{resultadoEmailUsuarios}}</label>
+	</div>
+	<br>
+	<div class="row">
+		<button class="btn btn-success" ng-click="devolverPromedioEdadHombres()">Promedio de edad de los usuarios hombres</button>
+		<label>{{promedioEdadHombres}}</label>
+	</div>
+	<br>
+	<div class="row">
+		<button class="btn btn-warning" ng-click="devolverUsuarioMasGrande()">Usuario más grande</button>
+		<label>{{usuarioMasGrande.Nombre}}, {{usuarioMasGrande.Edad}}</label>
+		<br>
+		<label>Objeto: {{usuarioMasGrande}}</label>
+	</div>
+	<div ui-view></div>
+</div>
