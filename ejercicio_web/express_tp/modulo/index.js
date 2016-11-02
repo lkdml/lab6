@@ -1,0 +1,1 @@
+module.exports = {id:'no de'};  //el module.export es el retorno. (es lo que se tendrà disponible cuando hagamos el require).

@@ -1,0 +1,26 @@
+<div ng-controller="ListadoCtrl">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Sexo</th>
+      <th>Email</th>
+      <th>DNI</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="slide" ng-repeat="persona in listadoUsuarios | filter:buscar | orderBy: 'id'  track by $index"> 
+      <td>{{persona.id}}</td>
+      <td>{{persona.name}}</td>
+      <td>{{persona.apellido}}</td>
+      <td>{{persona.sexo}}</td>
+      <td>{{persona.mail}}</td>
+      <td>{{persona.dni}}</td>
+      <td><button ng-click="borrar($index)" class="btn btn-small"><span class="glyphicon glyphicon-trash"></span></button></td>
+    </tr>
+  </tbody>
+</table>
+</div>

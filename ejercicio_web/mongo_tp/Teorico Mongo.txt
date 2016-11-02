@@ -1,0 +1,70 @@
+//mongod para levantar el servidor
+
+/*
+Tipos de bases nosql
+
+-clave valor= array asociativo, rapida para busquedas por indice, no es buena si vamos a buscar el valor, sirve para la clave
+
+-columna ancha= grandes volumenes, para calculos ,carga analitica, updates y deletes lentos. Almacena en una fila, todas por columna
+
+-grafos bd= almacena grafos, ej redes sociales, no importan los datos, sino las relaciones entre grafos
+
+-multi-modelo= combina multiples modelos, por ejemplo grafos y otra, es nueva y no hay ninguna version comercial
+
+-documentales= es mongo, son estructuras añidadas creadas usando la notacion de objetos javascript(JSON). Lo guarda como BSON(binary json)
+
+*/
+/*
+
+Tipos de busqueda
+
+1) rich queries= busca en todo el documento json
+2) geospatial= utiliza latitud y longitud para las busquedas(maneja poligonos)
+3) text search= busqueda modo google
+4) aggregation = realiza calculos sobre los valores, equivalente a count(*) y groupby de SQL
+5) Map Reduce = Es un framework que realiza operaciones de forma paralela sobre grandes colecciones de datos
+
+*/
+
+/*
+Conceptos
+
+Database
+Tabla ahora es Coleccion
+Fila ahora es documento
+Index es index
+Los join son Embedded documment
+Foreing Key ahora es referencia
+Multi table transaction ahora es single document transaction
+
+*/
+
+/*
+La manera que te ofrece para dar id unico es 
+4-byte timestamp
+3 byte id identificador de la maquina
+2 id del cliente que esta conectado
+3 random count
+
+Modelado y Cardinalidad
+
+Relacion uno a uno= gran performance al leer (Ejemplo titulo-autor va en el mismo documento)
+
+Uno a muchos= Linking approach / hybrid
+
+Una manera es embedida(Blog y comentarios, tengo en el mismo documento un array de todos los comentarios)
+Otra es linking(saco los comentarios embebidos y lo armo en otra coleccion y en comentarios voy a hacer un ObjectID("222") que va a ser su id en Post(post_id))
+Linking II (es igual pero en los post tengo una variable comments donde tengo los ids de los comentarios que voy a tener en mi tabla comentarios y ya no tengo el post_id en comentarios, solo en post voy a tener el array de id de los comentarios)
+Hybrid: (parecido a linking 2, pero le agrega nombre y comentario (informacion mas utilizada))
+
+Linking vs Embedding
+
+1) Embedding muy buena performance de lectura, la escritura lenta, la integridad necesita ser manejada.
+Tiene un sentido si la cardinalidad que embebemos no es muy grande (hasta 4.000 registros).
+El volumen tiene que ser predecible y parejo, asi response siempre en un tiempo aproximado
+
+2)Linking es flexible, nos permite juntar colecciones, la integridad de datos es automatica. Todo el trabajo se hace durante las lecturas, tengo que buscar datos de varios sitios
+
+Consideraciones: cuales son los patrones de lectura y cuales de escritura
+
+*/
