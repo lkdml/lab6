@@ -1,0 +1,88 @@
+Idexacion avanzada MongoBD
+
+Crear indice
+db.coll.createindex({fielName:Direccion(asc:desc)})
+
+Indices especiales:
+fullText: busquedas tipo google con diferentes valores por campo
+
+db.posts.createIndex({"commentario":"text"}) //con esto comvierte nuestro campo en texto.
+
+db.posts.find({$text{$search:"info"}}) //el $text hace referencia al indice creado llamado TEXTo
+
+eg: db.posts.find({"$text":{"$search":"red"}})
+
+Relevancia: "Weights"
+db.blog.createIndex({shortDescripcion:"text",
+					longDescripcion:"text",
+					name:"text"},
+					{weight:{shortDescripcion:3,
+							longDescripcion:1
+							name:10}})
+
+
+
+//clase
+$ mongoimport.exe --db enrondb --collection enron --file enron.json
+2016-11-09T19:34:24.859-0300    connected to: localhost
+2016-11-09T19:34:26.589-0300    imported 5929 documents
+
+$ mongoimport.exe --db enrondb --collection enron --file enron.json
+> db.enron.createIndex({text:"text",sender:"text",subject:"text"},{weights:{subject:10,sender:6,text:3}})
+
+> db.enron.getIndexes()
+
+
+> db.enron.find({$text:{$search:"dial"}},{score:{$meta:"textScore"}}).pretty()
+
+> db.enron.find({$text:{$search:"dial"}},{score:{$meta:"textScore"},subject:1,text:1,sender:1}).sort({score:{$meta:"textScore"}}).pretty()
+
+
+
+o Geoespaciales: Permite hacer busqueda de varios tipos, distancias, poligonos, se diferencian en que no usan los b-trees normales
+
+crateIndex({<locarion field>:"2dsphere"})
+//el campo debe tener un formato GeoJSON
+ej: db.wines,createIndex({geometry:"2dsphere"})
+
+operadores:
+geoIntersect: selecciona documentos que se intersectan con un objeto q le pasemos
+db.countries.findOne({geometry:{geoIntersects:{$geometry:{type:"point",cordinates:[-58.36,-34.66]}}}},"properties.name":1})
+
+$geoWithin: busca lo que este dentro de un area dada
+
+$near: gusca lo que encuentre cerca del punto que le pasamos
+
+
+//clase
+
+$ mongoimport.exe --db winesdb --collection wines --file wine_regions.json
+2016-11-09T20:14:56.607-0300    connected to: localhost
+2016-11-09T20:14:56.930-0300    imported 1083 documents
+
+alumno@LAB02PC13 /C/Program Files/MongoDB/Server/3.2/bin
+$ mongoimport.exe --db contrydb --collection countries --file countries.json
+2016-11-09T20:15:12.535-0300    connected to: localhost
+2016-11-09T20:15:12.969-0300    imported 241 documents
+
+> db.countries.findOne({geometry:{$geoIntersects:{$geometry:{type:"Point",coordinates:[-58.36,-34.66]}}}},{"properties.name":1})
+{
+        "_id" : ObjectId("5823ae00a4c726e6bcd8276c"),
+        "properties" : {
+                "name" : "Argentina"
+        }
+}
+
+> db.wines.find({geometry:{$near:{$geometry:{type:"Point",coordinates:[-3.81,43.47]},$maxDistance:250000}}}).count()
+10
+> db.wines.find({geometry:{$near:{$geometry:{type:"Point",coordinates:[-3.81,43.47]},maxDistance:250000}}}).count()
+1083
+
+
+#Agregarion Framework
+Emula el groupby de sql, para hacer busquedas analiticas
+
+db.orders.aggregate([
+					{$match:{status:"a"}},
+					{$group:{_id:"$cust_id",total:{$sum:"$amount"}}}
+					])
