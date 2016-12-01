@@ -1,0 +1,37 @@
+<div class="container">
+<div class="row">
+
+<div class="col-sm-6">
+    <!-- FORM ============ -->
+
+    <form name="mascotaForm" ng-submit="cargar()" novalidate>
+
+        <!-- Nombre de mascota -->
+        <div class="form-group" ng-class="{ 'has-error' : mascotaForm.nombreMascota.$invalid && !mascotaForm.nombreMascota.$pristine }">
+            <label>Nombre de la Mascota</label>
+            <input type="text" name="nombreMascota" class="form-control" ng-model="mascota.nombreMascota" required>
+            <p ng-show="mascotaForm.nombreMascota.$invalid && !mascotaForm.nombreMascota.$pristine" class="help-block">El nombre de la mascota es requerido</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : mascotaForm.tipoMascota.$invalid && !mascotaForm.tipoMascota.$pristine }">
+            <label>Tipo de Mascota</label>
+            <input type="text" name="tipoMascota" class="form-control" ng-model="mascota.tipoMascota" required>
+            <p ng-show="mascotaForm.tipoMascota.$invalid && !mascotaForm.tipoMascota.$pristine" class="help-block">El tipo de la mascota es requerido</p>
+        </div>
+
+        <!-- edad -->
+        <div class="form-group" ng-class="{ 'has-error' : mascotaForm.edad.$invalid && !mascotaForm.edad.$pristine }">
+            <label>Edad</label>
+            <input type="number" name="edad" class="form-control" ng-model="mascota.edad" required>
+            <p ng-show="mascotaForm.edad.$invalid && !mascotaForm.edad.$pristine" class="help-block">La edad es requerida</p>
+        </div>
+
+       
+
+        <button type="submit" class="btn btn-primary" ng-disabled="mascotaForm.$invalid">Enviar</button>
+
+    </form>
+  </div>
+
+</div>
+</div>

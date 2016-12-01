@@ -1,8 +1,8 @@
-express = require('express');
-router = express.Router({mergedparams : true});
+var express = require('express');
+var router = express.Router({mergedparams : true});
 
-productos = require('./productos');
-mascotas = require('./mascotas');
+var productos = require('./productos');
+var mascotas = require('./mascotas');
 
 router.use('/productos', productos);
 router.use('/mascotas', mascotas);

@@ -1,24 +1,30 @@
 angular
   .module('miApp')
-  .factory('Datos', [function(){
+  .factory('Datos', ['$http',function($http){
     var data = [];
-    
-    return {
-      listado : listado,
-      cargar: cargar,
-      borrar: borrar
-    }
+    var Url="http://localhost:3000";
 
-    function cargar(objeto){
-      data.push(objeto);
-    }
+    return { cargarMascota: cargarMascota,
+          listarMascotas: listarMascotas,
+          cargarProducto: cargarProducto,
+          listarProductos: listarProductos
+        };
 
-    function listado(){
-      return data;
-    }
+  function cargarMascota(objetoMascota){
+    return $http.post(Url+'/mascotas/nueva',objetoMascota);
+  }
 
-    function borrar(item) {
-      var pos = data.indexOf(item);
-      return data.splice(pos, 1);
-    }
+  function listarMascotas(){
+    return $http.get(Url+'/mascotas/');
+  }
+
+  function cargarProducto(objetoProducto){
+    return $http.post(Url+'/productos/cargar',objetoProducto);
+  }
+
+  function listarProductos(){
+    return $http.get(Url+'/productos/');
+  }
+
+
   }]);

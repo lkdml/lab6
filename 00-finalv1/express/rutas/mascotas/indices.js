@@ -1,8 +1,14 @@
-express = require('express')
+express = require('express');
+var cors = require('cors');
+
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+};
 router = express.Router({mergedparams : false}); //
 
 
-router.get('/',function(req,res){
+router.get('/', cors(corsOptions),function(req,res){
 
     req.db.collection('mascotas').createIndex({nombre:"text",
 					raza:"text",
@@ -14,7 +20,7 @@ router.get('/',function(req,res){
 });
 
 
-router.get('/:indice',function(req,res){
+router.get('/:indice', cors(corsOptions),function(req,res){
     req.db.collection('mascotas').find({$text:{$search:req.params.indice}}) 
     .toArray((err, data) => {
         res.json(data);

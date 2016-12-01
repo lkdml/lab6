@@ -1,6 +1,15 @@
 ﻿express = require('express');
-router = express.Router({mergedparams : false});//{mergedparams : false}
+var cors = require('cors');
 
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+};
+
+
+
+router = express.Router({mergedparams : false});//{mergedparams : false}
+router.use(cors(corsOptions));
 
 //3. Alta de una mascota
 router.post('/nueva',function(req,res){
@@ -35,7 +44,7 @@ router.get('/:raza',function(req,res){
 
 
 //4.c Las mascotas mayores a la edad especificada
-router.all('/mayor/:edad',function(req,res){
+router.all('/mayor/:edad', function(req,res){
     req.db.collection('mascotas')
     .find({edad:{$gte:(req.params.edad)}})
     .toArray((err, data) => {
@@ -64,7 +73,7 @@ router.get('/duenio/:nombre',function(req,res){
 });
 
 //i. la descarga del archivo
-router.get('/perros',function(req,res){
+router.get('/perros', function(req,res){
 	res.download('perros.pdf','perros.pdf')
 });
 
