@@ -2,28 +2,44 @@ angular
   .module('miApp')
   .factory('Datos', ['$http',function($http){
     var data = [];
-    var Url="http://localhost:3000";
+    var Url="http://localhost:3000/";
 
-    return { cargarMascota: cargarMascota,
+    return { buscarMascota:buscarMascota,
+          cargarMascota:cargarMascota,
+          eliminarMascota:eliminarMascota,
+          actualizarMascota:actualizarMascota,
           listarMascotas: listarMascotas,
           cargarProducto: cargarProducto,
           listarProductos: listarProductos
         };
 
-  function cargarMascota(objetoMascota){
-    return $http.post(Url+'/mascotas/nueva',objetoMascota);
+  function cargarMascota(Mascota){
+    return $http.post(Url+'mascotas/nueva',Mascota);
   }
 
   function listarMascotas(){
-    return $http.get(Url+'/mascotas/');
+    return $http.get(Url+'mascotas/');
   }
 
-  function cargarProducto(objetoProducto){
-    return $http.post(Url+'/productos/cargar',objetoProducto);
+  function actualizarMascota(Mascota){
+    return $http.post(Url+'mascotas/actualizar',Mascota);
+  }
+
+  function eliminarMascota(Mascota){
+    return $http.post(Url+'mascotas/eliminar',Mascota);
+  }
+
+  function buscarMascota(criterio){
+    return $http.get(Url+'mascotas/buscar/'+criterio);
+  }
+
+
+  function cargarProducto(Producto){
+    return $http.post(Url+'productos/cargar',Producto);
   }
 
   function listarProductos(){
-    return $http.get(Url+'/productos/');
+    return $http.get(Url+'productos/');
   }
 
 

@@ -3,7 +3,7 @@ var cors = require('cors');
 
 var corsOptions = {
   origin: '*',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 
@@ -13,6 +13,7 @@ router.use(cors(corsOptions));
 
 //3. Alta de una mascota
 router.post('/nueva',function(req,res){
+  console.log(req.body);
     req.db.collection('mascotas')
     .insert(req.body,function(e){
         if (e)
@@ -66,7 +67,7 @@ router.get('/duenio/:nombre',function(req,res){
 		req.db.collection('mascotas')
 	.aggregate( [ { $match : { "duenio.nombre" : req.params.nombre }
 				} ] )
-    
+
     .toArray((err, data) => {
         res.json(data);
     });
@@ -77,7 +78,26 @@ router.get('/perros', function(req,res){
 	res.download('perros.pdf','perros.pdf')
 });
 
+router.post('/actualizar',function(req,res){
+    var objetoMascota =req.body;
+    var idMascota=objetoMascota._id;
+    delete objetoMascota._id
+	req.db.collection('mascotas')
+	.update({ _id: req.ObjectID(idMascota)},{ $set : objetoMascota }, function (err, result) {
+        res.send(
+            (err === null) ? {msg: ''} : {msg: err}
+        );
+    });
+});
+
+router.post('/eliminar',function(req,res){
+    req.db.collection('mascotas')
+    .remove({ _id: req.ObjectID(req.body._id)}, function (err, result) {
+        res.send(
+            (err === null) ? {msg: ''} : {msg: err}
+        );
+    });
+});
+
 
 module.exports = router;
-
-

@@ -1,7 +1,8 @@
 angular
   .module('miApp')
-  .controller('ListadoMasctaCtrl', ['$scope', 'Datos',
-   function($scope, Datos){
+  .controller('ListadoMascotaCtrl', ['$scope','$state', 'Datos','ActualizarMascota',
+   function($scope,$state, Datos, ActualizarMascota){
+
 
    	Datos.listarMascotas().then(function(rta){
         $scope.mascotas= rta.data;
@@ -11,15 +12,25 @@ angular
       });
 
    	$scope.borrar=function(indice){
-   		$scope.usuarios.splice(indice,1);
-   		//llamar a datos
+      $scope.mascotas.splice($scope.mascotas.indexOf(indice),1);
+      Datos.eliminarMascota(indice);
    	};
 
-   	$scope.editar=function(objetoMascota){
-   		//$scope.usuarios.splice(indice,1);
+    $scope.editar=function(Mascota){
       $state.go('modifMascota');
-      console.log(indice);
+      ActualizarMascota.mascota=Mascota;
    	};
+
+
+    $scope.buscarPorIndice= function(criterio){
+      $scope.criterio="";
+      Datos.buscarMascota(criterio).then(function(rta){
+        $scope.mascotas= rta.data;
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+    }
 
 
   }]);

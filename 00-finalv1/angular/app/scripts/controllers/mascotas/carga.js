@@ -7,8 +7,9 @@ angular
 
      function cargar() {
        Datos.cargarMascota($scope.mascota);
-       console.log($scope.mascota);
-       console.log(Datos.listado());
+       $scope.mascotaForm.$setPristine();
+       //console.log($scope.mascota);
+       //console.log(Datos.listado());
        $scope.mascota = {};
      }
   }]);

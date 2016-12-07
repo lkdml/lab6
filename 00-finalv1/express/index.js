@@ -1,4 +1,5 @@
 var MongoClient = require( 'mongodb' ).MongoClient;
+var ObjectID = require('mongodb').ObjectID;
 var express = require('express');
 var app = express();
 var rutas = require('./rutas');
@@ -24,12 +25,17 @@ MongoClient.connect('mongodb://localhost:27017/bdFinal', function(err, db) {
         throw err;
     app.use((req, res, next) => {
         req.db = db;
+				req.ObjectID=ObjectID;
         next();
     });
+
+    db.collection('mascotas').dropIndexes();
+    db.collection('mascotas').createIndex({"nombreMascota":"text","tipoMascota":"text","edad":"text"}, {weight:{"nombreMascota":10,"tipoMascota":5,"edad":2}});
+
+
 	app.use('/',rutas);
 	//como es async , lo hago aca
 	app.listen(3000,function(){
 		console.log('Servidor funcionando en el puerto 3000')
 	});
 });
-

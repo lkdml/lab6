@@ -31,7 +31,7 @@ angular
 
     $stateProvider.state('listadoMascotas',{
         url:'/mascotas/listado',
-        controller: 'ListadoMasctaCtrl',
+        controller: 'ListadoMascotaCtrl',
         templateUrl:'views/mascotas/listado.html'
       })
 
@@ -43,11 +43,11 @@ angular
 
     $stateProvider.state('modifMascota',{
         url:'/mascotas/modificar',
-        controller: 'CargaMascotaCtrl',
-        templateUrl:'views/list.html'
+        controller: 'ModifMascotaCtrl',
+        templateUrl:'views/mascotas/carga.html'
       })
-    
-    
+
+
 
     //despues en el html, usamos ui-sref="" y le pasamos el estado de las diferentes configuraciones
 
@@ -88,5 +88,3 @@ angular
       }
     }
   })
-
-
