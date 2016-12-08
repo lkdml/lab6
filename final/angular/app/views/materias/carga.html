@@ -1,0 +1,63 @@
+<div class="container">
+<div class="row">
+
+<div class="col-sm-6">
+    <!-- FORM ============ -->
+
+    <form name="materiaForm" ng-submit="cargar()" novalidate>
+
+        <!-- Nombre de materia -->
+        <div class="form-group" ng-class="{ 'has-error' : materiaForm.nombre.$invalid && !materiaForm.nombre.$pristine }">
+            <label>Nombre de la Materia</label>
+            <input type="text" name="nombre" class="form-control" ng-model="materia.nombre" required>
+            <p ng-show="materiaForm.nombre.$invalid && !materiaForm.nombre.$pristine" class="help-block">El nombre de la materia es requerido</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : materiaForm.descripcion.$invalid && !materiaForm.descripcion.$pristine }">
+            <label>Descripcion de la materia</label>
+            <input type="text" name="descripcion" class="form-control" ng-model="materia.descripcion" required>
+            <p ng-show="materiaForm.descripcion.$invalid && !materiaForm.descripcion.$pristine" class="help-block">El tipo de la materia es requerido</p>
+        </div>
+
+        <!-- Cuatrimestre -->
+        <div class="form-group" ng-class="{ 'has-error' : materiaForm.cuatrimestre.$invalid && !materiaForm.cuatrimestre.$pristine }">
+            <label>Cuatrimestre</label>
+            <select name="cuatrimestre" class="form-control" ng-model="materia.cuatrimestre" required>
+              <option value="a1" selected >1er Cuatrimestre</option>
+              <option value="a2">2do Cuatrimestre</option>
+            </select>
+            
+            <p ng-show="materiaForm.cuatrimestre.$invalid && !materiaForm.cuatrimestre.$pristine" class="help-block">El cuatrimestre es requerido</p>
+        </div>
+
+<!-- correlativas -->
+        <div class="form-group" ng-class="{ 'has-error' : materiaForm.correlativas.$invalid && !materiaForm.correlativas.$pristine }">
+            <label>Materias Correlativas</label>
+            <select name="correlativas" class="form-control" ng-model="materia.correlativas" required multiple>
+              <option value="SQL">SQL</option>
+              <option value="PA2">Prog Avanzada 2</option>
+              <option value="PA1">Prog Avanzada 1</option>
+              <option value="P01">Prog 1</option>
+              <option value="P02">Prog 2</option>
+              <option value="P03">Prog 3</option>
+            </select>
+
+            <!--<input type="text" name="correlativas" class="form-control" ng-model="materia.correlativas" required> -->
+            <p ng-show="materiaForm.correlativas.$invalid && !materiaForm.correlativas.$pristine" class="help-block">El campo es requerido</p>
+        </div>
+
+        <!-- Alumnos -->
+        <div class="form-group" ng-class="{ 'has-error' : materiaForm.alumnos.$invalid && !materiaForm.alumnos.$pristine }">
+            <label>Cursantes</label>
+            <input type="text" name="alumnos" class="form-control" ng-model="materia.alumnos" required>
+            <p ng-show="materiaForm.alumnos.$invalid && !materiaForm.alumnos.$pristine" class="help-block">El campo es requerido</p>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" ng-disabled="materiaForm.$invalid">Enviar</button>
+
+    </form>
+  </div>
+
+</div>
+</div>

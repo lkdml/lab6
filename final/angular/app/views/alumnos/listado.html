@@ -1,0 +1,63 @@
+<div>
+	<table class="table striped">
+		<tr>
+			<th>Realizar busqueda tipo google:</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="slide" >
+		<td><input type="text" ng-model="criterio" class="form-control" placeholder="Busqueda indexada"></td>
+		<td><button class="btn btn-info" ng-click="buscarPorIndice(criterio)">Buscar por Indice</button></td>
+	</tr>
+	</tbody>
+	</table>
+
+	<label>Filtros rapidos</label>
+	<input type="text" ng-model="buscar.nombre" class="form-control" placeholder="Buscar por nombre...">
+	<input type="text" ng-model="buscar.apellido" class="form-control" placeholder="Buscar por Apellido...">
+	<input type="text" ng-model="buscar.legajo" class="form-control" placeholder="Buscar por Legajo...">
+	<table class="table striped">
+		<thead>
+			<tr>
+				<th>Editar</th>
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Legajo</th>
+				<th>Cursadas</th>
+				<th>Nota</th>
+				<th>Borrar</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="slide" ng-repeat="alumnos in alumnos | filter:{nombre: buscar.nombre, apellido: buscar.apellido, legajo: buscar.legajo} track by alumnos._id ">
+				<td><button class="btn btn-small btn-warning" ng-click="editar(alumnos)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				<td>{{$index+1}}</td>
+				<td>{{alumnos.nombre}}</td>
+				<td>{{alumnos.apellido}}</td>
+				<td>{{alumnos.legajo}}</td>
+				<td>{{alumnos.cursadas}}</td>
+				<td>{{alumnos.notas}}</td>
+				<td><button class="btn btn-small btn-danger" ng-click="borrar(alumnos)"><span class="glyphicon glyphicon-trash"></span></button></td>
+
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<table class="table striped">
+		<tr>
+			<th>Realizar busqueda por notas:</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="slide" >
+		<td><input type="text" ng-model="nota" class="form-control" placeholder="Busqueda indexada"></td>
+		<td><button class="btn btn-info" ng-click="buscarPorNota(nota)">Buscar por Notas</button></td>
+	</tr>
+	</tbody>
+	</table>
+

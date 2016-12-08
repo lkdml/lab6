@@ -1,0 +1,50 @@
+<div class="container">
+<div class="row">
+
+<div class="col-sm-6">
+    <!-- FORM ============ -->
+
+    <form name="alumnoForm" ng-submit="cargar()" novalidate>
+
+        <!-- Nombre de alumno -->
+        <div class="form-group" ng-class="{ 'has-error' : alumnoForm.nombre.$invalid && !alumnoForm.nombre.$pristine }">
+            <label>Nombre del alumno</label>
+            <input type="text" name="nombre" class="form-control" ng-model="alumno.nombre" required>
+            <p ng-show="alumnoForm.nombre.$invalid && !alumnoForm.nombre.$pristine" class="help-block">El nombre de la alumno es requerido</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : alumnoForm.apellido.$invalid && !alumnoForm.apellido.$pristine }">
+            <label>Apellido del alumno</label>
+            <input type="text" name="apellido" class="form-control" ng-model="alumno.apellido" required>
+            <p ng-show="alumnoForm.apellido.$invalid && !alumnoForm.apellido.$pristine" class="help-block">El campo es requerido</p>
+        </div>
+
+        <!-- legajo -->
+        <div class="form-group" ng-class="{ 'has-error' : alumnoForm.legajo.$invalid && !alumnoForm.legajo.$pristine }">
+            <label>Edad</label>
+            <input type="number" name="legajo" class="form-control" ng-model="alumno.legajo" required>
+            <p ng-show="alumnoForm.legajo.$invalid && !alumnoForm.legajo.$pristine" class="help-block">El campo es requerido</p>
+        </div>
+
+<!-- cursadas -->
+        <div class="form-group" ng-class="{ 'has-error' : alumnoForm.cursadas.$invalid && !alumnoForm.cursadas.$pristine }">
+            <label>notas cursadas</label>
+            <input type="text" name="cursadas" class="form-control" ng-model="alumno.cursadas" required>
+            <p ng-show="alumnoForm.cursadas.$invalid && !alumnoForm.cursadas.$pristine" class="help-block">El campo es requerido</p>
+        </div>
+
+        <!-- notas -->
+        <div class="form-group" ng-class="{ 'has-error' : alumnoForm.notas.$invalid && !alumnoForm.notas.$pristine }">
+            <label>Notas</label>
+            <input type="number" name="notas" class="form-control" ng-model="alumno.notas" required>
+            <p ng-show="alumnoForm.notas.$invalid && !alumnoForm.notas.$pristine" class="help-block">El campo es requerido</p>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" ng-disabled="alumnoForm.$invalid">Enviar</button>
+
+    </form>
+  </div>
+
+</div>
+</div>
